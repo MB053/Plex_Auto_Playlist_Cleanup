@@ -1,5 +1,6 @@
 # 🎬 Auto Cleanup Script for Plex
 
+---
 Automatically manage your Plex playlists by removing watched items and keeping your playlists fresh — (future) optionally continuing movie collections or TV series.
 This script can be run as Cron or as a notification agent, in Tautulli
 ---
