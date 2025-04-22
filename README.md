@@ -83,26 +83,6 @@ Or use the included shell wrapper:
 
 ---
 
-## 🧩 Optional: Enable Series Episode Progression
-
-In `Auto_Remove_Script.py`, uncomment this block in `process_playlist()` to enable it:
-
-```python
-if item["type"] == "episode":
-    next_ep = get_next_episode(grandparent_key, index)
-    if next_ep and not is_item_already_in_playlist(items, next_ep["rating_key"]):
-        if add_item_to_playlist(playlist_id, next_ep["rating_key"]):
-            print(f"    ➕ Added next episode: {next_ep['title']}")
-```
-
----
-
-## 📚 Documentation
-
-📝 Full documentation and advanced usage can be found in the [GitHub Wiki](https://github.com/your-username/plex-auto-remove/wiki)
-
----
-
 ## 🛠 Planned Features
 
 - 🔄 Add next serie episode to playlist
@@ -119,3 +99,6 @@ Feel free to open issues, suggest features, or submit pull requests! Make sure t
 ## 🛡 License
 
 MIT — Free to use, modify, and share. Attribution is appreciated 💛
+
+Like the Script show your appriciation
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/MB053)
