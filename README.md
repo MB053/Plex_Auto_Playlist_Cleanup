@@ -100,5 +100,5 @@ Feel free to open issues, suggest features, or submit pull requests! Make sure t
 
 MIT — Free to use, modify, and share. Attribution is appreciated 💛
 
-Like the Script show your appriciation
+
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/MB053)
