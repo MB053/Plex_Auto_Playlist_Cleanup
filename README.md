@@ -37,9 +37,13 @@ pip install requests
 Edit the top of the script:
 
 PLEX_URL = "http://<YOUR_PLEX_IP>:32400"
+
 PLEX_TOKEN = "your_plex_token_here"
+
 MOVIE_PLAYLIST = "YOUR_FILM_PLAYLIST"
+
 SHOW_PLAYLIST = "YOUR_SHOW_PLAYLIST"
+
 DEBUG = True  # Set to False to disable debug output
 
 You must create playlists in Plex manually and name them exactly as configured.
