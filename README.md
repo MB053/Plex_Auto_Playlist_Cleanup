@@ -1,105 +1,106 @@
-# 🎬 Auto Cleanup Script for Plex
+🎬 Plex Auto-Clean Playlist Script
 
----
-Automatically manage your Plex playlists by removing watched items and keeping your playlists fresh — (future) optionally continuing movie collections or TV series.
-This script can be run as Cron or as a notification agent, in Tautulli
----
+This Python script is designed to maintain your Plex playlists by automatically removing watched items and, if applicable, adding the next unwatched item in a movie collection.
 
-## 🚀 What It Does
+It's ideal for users who want their movie or TV show playlists to always contain only unwatched content — and in the right order.
 
-- ✅ Removes **watched** movies and episodes from specified Plex playlists
-- ✅ Supports **multiple playlists** (e.g., movies and shows)
-- ✅ Includes full debug output and safety checks
-- ✅ Designed for automation via cron, Tautulli, etc.
+✨ Features
 
----
+✅ Validates your Plex Token
 
-## 🔧 Setup
+🧹 Automatically removes watched movies or episodes from specified playlists
 
-### 1. Clone the Repo
+🔗 Detects if a movie is part of a Plex Collection and automatically adds the next unwatched movie
 
-```bash
-git clone https://github.com/MB053/Plex_Auto_Playlist_Cleanup.git
-cd plex-auto-remove
-```
+🔍 Uses originallyAvailableAt to determine order (instead of relying on unreliable indexes)
 
-### 2. Create a Virtual Environment (recommended)
+📺 Skips this behavior for TV episodes (optional logic)
 
-```bash
-python3 -m venv plex_env
-source plex_env/bin/activate
+🔐 Works securely using your Plex Token and server machine ID
+
+🪵 Includes debug output for easy tracking and troubleshooting
+
+📦 Requirements
+
+Python 3.6+
+
+Plex Media Server (local network or remote access)
+
+A valid Plex token
+
+Install required libraries:
+
 pip install requests
-```
 
-### 3. Edit the Script
+⚙️ Configuration
 
-Open `Auto_Remove_Script.py` and set the config at the top:
+Edit the top of the script:
 
-```python
-PLEX_URL = "http://<YOUR_PLEX_IP>:32400"
-PLEX_TOKEN = "<YOUR_PLEX_TOKEN>"
+PLEX_URL = "http://192.168.1.x:32400"
+PLEX_TOKEN = "your_plex_token_here"
+MOVIE_PLAYLIST = "Film Test"
+SHOW_PLAYLIST = "Serie Test"
+DEBUG = True  # Set to False to disable debug output
 
-MOVIE_PLAYLIST = "YOUR_FILM_PLAYLIST"
-SHOW_PLAYLIST = "YOUR_SHOW_PLAYLIST"
-```
+You must create playlists in Plex manually and name them exactly as configured.
 
----
+🚀 Usage
 
-## ▶️ Run the Script
+You can run the script manually:
 
-```bash
-python Auto_Remove_Script.py
-```
+python plex_playlist_cleaner.py
 
-Or use the included shell wrapper:
+Or, for automated execution, integrate it into Tautulli as a Notifier script.
 
-```bash
-./run_auto_remove.sh
-```
+🧠 How it works
 
----
+For Movies
 
-## ⚙️ Features in Detail
+The script checks if a movie in your playlist has been watched.
 
-| Feature | Description |
-|--------|-------------|
-| 🧼 Remove Watched | Removes any playlist item with `viewCount > 0` |
-| 📜 XML Support | Handles both `<PlaylistItem>` and `playlistItemID` attributes |
-| 🛡 Safe Skips | Gracefully handles items Plex won't allow to be removed |
-| 📈 Debug Mode | Enable `DEBUG = True` for full logs of everything it does |
+If it has:
 
----
+It removes it from the playlist.
 
-## 🧪 Example Output
+If it belongs to a Collection (like "Harry Potter Collection"):
 
-```bash
---- Processing Playlist: Film Roulette ---
-[DEBUG] → Rocky: viewCount = 1
-  ✅ Removed: Rocky
+It finds the next unwatched movie in that collection.
 
---- Processing Playlist: Serie Roulette ---
-[DEBUG] → Episode 1: viewCount = 1
-  ✅ Removed: Episode 1
-```
+It adds it to the playlist.
 
----
+For TV Shows
 
-## 🛠 Planned Features
+Watched episodes are removed.
 
-- 🔄 Add next serie episode to playlist
-- 💬 Add next movie in collection to Playlist 
+No episodes are added automatically. (This logic can be extended.)
 
----
+📂 Example Output
 
-## 🧑‍💻 Contributing
+✅ Plex token is valid.
+[DEBUG] Found playlist 'Film Test' with ID 31740
+[DEBUG] ✅ Removed watched item: Bad Boys
+[DEBUG] Found next in collection: Bad Boys for Life
+➕ Added next movie in 'Bad Boys Collection': Bad Boys for Life
 
-Feel free to open issues, suggest features, or submit pull requests! Make sure to test your changes with your own Plex instance before submitting.
+🔐 Security
 
----
+Make sure your script is stored safely — your Plex Token provides full access to your server.
+Consider using environment variables or secrets management if integrating into larger systems.
 
-## 🛡 License
+🛠️ To-Do / Ideas
 
-MIT — Free to use, modify, and share. Attribution is appreciated 💛
 
+
+📄 License
+
+MIT — feel free to fork, improve, and contribute!
+
+🙏 Credits
+
+Built for Plex enthusiasts who want a "smart" playlist system.
+
+Inspired by the limitations of native Plex playlist behavior.
+
+Happy streaming! 🍿
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/MB053)
