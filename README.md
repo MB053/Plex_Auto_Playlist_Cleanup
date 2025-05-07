@@ -1,110 +1,106 @@
-🎬 Plex Auto-Clean Playlist Script
 
-This Python script is designed to maintain your Plex playlists by automatically removing watched items and, if applicable, adding the next unwatched item in a movie collection.
+# Plex Auto Playlist Cleaner & Organizer (Ultimate Edition)
 
-It's ideal for users who want their movie or TV show playlists to always contain only unwatched content — and in the right order.
+Automatically keeps your Plex playlists clean and in proper order by:
+- Removing watched movies/shows
+- Automatically adding the next or previous unwatched movie from the same collection
+- Sending Telegram notifications about all changes
+- Optional debug mode for detailed logging
 
-✨ Features
+## 📦 Features
 
-✅ Validates your Plex Token
+✅ Remove watched movies and episodes from playlists.  
+✅ Automatically add the next unwatched movie/episode from the same collection.  
+✅ Automatically replace movies with their previous movie if the previous is unwatched.  
+✅ Telegram notifications with added and removed items (optional).  
+✅ Debug mode (optional) for verbose logging during processing.
 
-🧹 Automatically removes watched movies or episodes from specified playlists
+## 📌 Supported
 
-🔗 Detects if a movie is part of a Plex Collection and automatically adds the next unwatched movie
+- Movies (with collection awareness)
+- TV Shows (optional, basic)
+- Telegram for notification
+- Plex API integration
 
-🔍 Uses originallyAvailableAt to determine order (instead of relying on unreliable indexes)
+---
 
-📺 Skips this behavior for TV episodes (optional logic)
+## 🚀 Installation
 
-🔐 Works securely using your Plex Token and server machine ID
+### 1. Download the script
 
-🪵 Includes debug output for easy tracking and troubleshooting
+Clone or download this repository or save the script locally.
 
-📦 Requirements
+### 2. Edit configuration
 
-Python 3.6+
+At the top of the script, configure your Plex and Telegram details:
 
-Plex Media Server (local network or remote access)
-
-A valid Plex token
-
-Install required libraries:
-
-pip install requests
-
-⚙️ Configuration
-
-Edit the top of the script:
-
+```
 PLEX_URL = "http://<YOUR_PLEX_IP>:32400"
+PLEX_TOKEN = "<YOUR_PLEX_TOKEN>"
 
-PLEX_TOKEN = "your_plex_token_here"
+MOVIE_PLAYLIST = "Your Movie Playlist Name"
+SHOW_PLAYLIST = "Your Show Playlist Name"
 
-MOVIE_PLAYLIST = "YOUR_FILM_PLAYLIST"
+TELEGRAM_BOT_TOKEN = "<YOUR_TELEGRAM_BOT_TOKEN>"
+TELEGRAM_CHAT_ID = "<YOUR_TELEGRAM_CHAT_ID>"
 
-SHOW_PLAYLIST = "YOUR_SHOW_PLAYLIST"
+DEBUG = True  # Enable or disable detailed debug output
+```
 
-DEBUG = True  # Set to False to disable debug output
+- Telegram is optional, leave `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` empty if you do not want notifications.
+- Debug mode shows detailed internal processing and is useful for troubleshooting.
 
-You must create playlists in Plex manually and name them exactly as configured.
+### 3. Run the script
 
-🚀 Usage
+```
+python3 Auto_Remove_Script_Ultimate_With_Telegram_Debug.py
+```
 
-You can run the script manually:
+### 4. (Optional) Schedule it with cron
 
-python plex_playlist_cleaner.py
+Example crontab entry to run every night at 3am:
 
-Or, for automated execution, integrate it into Tautulli as a Notifier script.
+```
+0 3 * * * /usr/bin/python3 /path/to/Auto_Remove_Script_Ultimate_With_Telegram_Debug.py
+```
 
-🧠 How it works
+---
 
-For Movies
+## 🔔 Telegram Notifications
 
-The script checks if a movie in your playlist has been watched.
+You will receive messages like this on Telegram (if configured):
 
-If it has:
+```
+🗑 Removed 'Rocky 3' → Previous movie 'Rocky 2' is unwatched.
+➕ Added previous 'Rocky 2' from 'Rocky Collection'.
+🗑 Removed watched 'F9' from playlist.
+➕ Added next 'Fast X' from 'Fast and the Furious Collection'.
+```
 
-It removes it from the playlist.
+### How to get Telegram Bot Token and Chat ID
+1. Create a bot via [BotFather](https://t.me/botfather).
+2. Send `/start` to the bot and grab your `chat_id` via a simple API call (or use @userinfobot).
+3. Fill in `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in the script.
 
-If it belongs to a Collection (like "Harry Potter Collection"):
+---
 
-It finds the next unwatched movie in that collection.
+## ⚙️ Advanced Options
 
-It adds it to the playlist.
+- Toggle `DEBUG` to `True` or `False` to show verbose debug logs in console.
+- Telegram will only show summary notifications (not debug spam).
 
-For TV Shows
+---
 
-Watched episodes are removed.
+## 📚 Credits
 
-No episodes are added automatically. (This logic can be extended.)
+Built and improved step-by-step with feedback and usage cases by @yournamehere + ChatGPT (OpenAI) for advanced scripting support.
 
-📂 Example Output
+---
 
-✅ Plex token is valid.
-[DEBUG] Found playlist 'Film Test' with ID 31740
-[DEBUG] ✅ Removed watched item: Bad Boys
-[DEBUG] Found next in collection: Bad Boys for Life
-➕ Added next movie in 'Bad Boys Collection': Bad Boys for Life
+## 📌 Disclaimer
 
-🔐 Security
+This script is provided as-is and tested on Plex Media Server latest versions.  
+Always test carefully before enabling automated removals on live playlists.
 
-Make sure your script is stored safely — your Plex Token provides full access to your server.
-Consider using environment variables or secrets management if integrating into larger systems.
-
-🛠️ To-Do / Ideas
-
-
-
-📄 License
-
-MIT — feel free to fork, improve, and contribute!
-
-🙏 Credits
-
-Built for Plex enthusiasts who want a "smart" playlist system.
-
-Inspired by the limitations of native Plex playlist behavior.
-
-Happy streaming! 🍿
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/MB053)
