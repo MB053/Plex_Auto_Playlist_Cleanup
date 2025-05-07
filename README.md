@@ -53,7 +53,7 @@ DEBUG = True  # Enable or disable detailed debug output
 ### 3. Run the script
 
 ```
-python3 Auto_Remove_Script_Ultimate_With_Telegram_Debug.py
+python3 Auto_Remove_Script.py
 ```
 
 ### 4. (Optional) Schedule it with cron
@@ -61,7 +61,7 @@ python3 Auto_Remove_Script_Ultimate_With_Telegram_Debug.py
 Example crontab entry to run every night at 3am:
 
 ```
-0 3 * * * /usr/bin/python3 /path/to/Auto_Remove_Script_Ultimate_With_Telegram_Debug.py
+0 3 * * * /usr/bin/python3 /path/to/Auto_Remove_Script.py
 ```
 
 ---
